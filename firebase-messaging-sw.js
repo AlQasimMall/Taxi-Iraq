@@ -1,7 +1,6 @@
 // Import Firebase scripts
 importScripts('https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js');
 importScripts('https://www.gstatic.com/firebasejs/8.10.0/firebase-messaging.js');
-importScripts('https://cdn.jsdelivr.net/npm/idb@7.0.0/build/iife/index-min.js');
 
 // Firebase configuration
 firebase.initializeApp({
@@ -120,7 +119,7 @@ self.addEventListener('install', (event) => {
                             completed++;
                             console.log(`Cached ${completed}/${total}: ${url}`);
                         } catch (error) {
-                            console.error(`Failed to cache ${url}:`, error);
+                            console.warn(`Failed to cache: ${url}`, error);
                         }
                     })
                 );
@@ -130,9 +129,15 @@ self.addEventListener('install', (event) => {
                 await Promise.all(
                     EXTERNAL_ASSETS.map(async (url) => {
                         try {
-                            await cache.add(new Request(url, { mode: 'no-cors' }));
+                            const response = await fetch(url, { 
+                                mode: 'no-cors',
+                                credentials: 'omit',
+                                cache: 'no-cache'
+                            });
+                            await cache.put(url, response);
+                            console.log(`Successfully cached external asset: ${url}`);
                         } catch (error) {
-                            console.error(`Failed to cache ${url}:`, error);
+                            console.warn(`Failed to cache external asset: ${url}`, error);
                         }
                     })
                 );
@@ -190,14 +195,24 @@ self.addEventListener('fetch', (event) => {
                     const networkResponse = await fetch(event.request);
                     
                     // Cache successful same-origin responses
-                    if (event.request.url.startsWith(self.location.origin)) {
+                    if (networkResponse.ok && event.request.url.startsWith(self.location.origin)) {
                         const cache = await caches.open(CACHE_NAME);
                         cache.put(event.request, networkResponse.clone());
                     }
-
+                    
                     return networkResponse;
                 } catch (fetchError) {
-                    console.error('Fetch error:', fetchError);
+                    // Handle offline scenarios
+                    console.log('Fetch failed, serving offline content:', fetchError);
+                    
+                    if (event.request.destination === 'image') {
+                        return caches.match('/default-image.png');
+                    }
+                    
+                    if (event.request.mode === 'navigate') {
+                        return caches.match('/offline.html');
+                    }
+                    
                     throw fetchError;
                 }
             } catch (error) {
@@ -226,12 +241,12 @@ messaging.getToken({
 // Helper function to store token in IndexedDB
 async function saveTokenToIndexedDB(token) {
     try {
-        const db = await idb.openDB('firebase-messaging-database', 1, {
+        const db = await openDB('fcm-store', 1, {
             upgrade(db) {
-                db.createObjectStore('tokens', { keyPath: 'id' });
-            },
+                db.createObjectStore('tokens');
+            }
         });
-        await db.put('tokens', { id: 'fcm_token', token });
+        await db.put('tokens', token, 'current');
         console.log('Token saved to IndexedDB');
     } catch (error) {
         console.error('Error saving token to IndexedDB:', error);

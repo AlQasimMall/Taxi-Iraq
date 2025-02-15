@@ -263,4 +263,3 @@ const nearbyDriversManager = new NearbyDriversManager();
 document.addEventListener('DOMContentLoaded', () => {
     nearbyDriversManager.initialize();
 });
-
