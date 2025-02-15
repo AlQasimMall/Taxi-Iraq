@@ -14,12 +14,12 @@
     <title>تاكسي العراق - خدمة حجز السيارات الأولى في العراق</title>
 
     <!-- App Icons -->
-    <link rel="icon" type="image/png" href="https://firebasestorage.googleapis.com/v0/b/messageemeapp.appspot.com/o/driver-images%2F7605a607-6cf8-4b32-aee1-fa7558c98452.png?alt=media&token=5cf9e67c-ba6e-4431-a6a0-79dede15b527">
-    <link rel="apple-touch-icon" sizes="180x180" href="https://firebasestorage.googleapis.com/v0/b/messageemeapp.appspot.com/o/driver-images%2F7605a607-6cf8-4b32-aee1-fa7558c98452.png?alt=media&token=5cf9e67c-ba6e-4431-a6a0-79dede15b527">
-    <link rel="apple-touch-startup-image" href="https://firebasestorage.googleapis.com/v0/b/messageemeapp.appspot.com/o/driver-images%2F7605a607-6cf8-4b32-aee1-fa7558c98452.png?alt=media&token=5cf9e67c-ba6e-4431-a6a0-79dede15b527">
+    <link rel="icon" type="image/png" href="/images/logo.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/logo.png">
+    <link rel="apple-touch-startup-image" href="/images/logo.png">
 
     <!-- Web App Manifest -->
-    <link rel="manifest" href="./manifest.json">
+    <link rel="manifest" href="/manifest.json">
 
     <!-- External CSS Libraries -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.rtl.min.css">
@@ -28,42 +28,18 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css">
 
     <!-- App CSS -->
-    <link rel="stylesheet" href="style.css?v=2">
-<script src="app.js?v=2"></script>
-    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="/css/style.css">
 
     <!-- Meta Tags -->
     <meta property="og:title" content="تاكسي العراق">
     <meta property="og:description" content="خدمة حجز سيارات الأجرة الأفضل في العراق">
-    <meta property="og:image" content="https://firebasestorage.googleapis.com/v0/b/messageemeapp.appspot.com/o/driver-images%2F7605a607-6cf8-4b32-aee1-fa7558c98452.png?alt=media&token=5cf9e67c-ba6e-4431-a6a0-79dede15b527">
+    <meta property="og:image" content="/images/logo.png">
     <meta property="og:url" content="https://taxi-iraq.com">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="تاكسي العراق">
     <meta name="twitter:description" content="خدمة حجز سيارات الأجرة الأفضل في العراق">
-    <meta name="twitter:image" content="https://firebasestorage.googleapis.com/v0/b/messageemeapp.appspot.com/o/driver-images%2F7605a607-6cf8-4b32-aee1-fa7558c98452.png?alt=media&token=5cf9e67c-ba6e-4431-a6a0-79dede15b527">
-</head>
-<body>
-    <!-- Content will be here -->
+    <meta name="twitter:image" content="/images/logo.png">
 
-    <!-- External Libraries -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js"></script>
-    <script src="https://unpkg.com/babel-standalone/babel.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-    <script src="https://unpkg.com/react@18.2.0/umd/react.production.min.js"></script>
-    <script src="https://unpkg.com/react-dom@18.2.0/umd/react-dom.production.min.js"></script>
-
-    <!-- Firebase Scripts -->
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-messaging.js"></script>
-
-    
-    <!-- App Scripts -->
-    <script src="firebase-config.js"></script>
-    
 
 
     <!-- Application CSS -->
@@ -4244,6 +4220,7 @@ body {
     </style>
 </head>
 <body>
+    <div id="app"></div>
     <!-- Header -->
     <nav class="navbar navbar-expand-lg navbar-dark app-header fixed-top">
 
@@ -4793,7 +4770,7 @@ body {
         <div class="modal-content chat-window">
             <!-- رأس النافذة مع صورة واسم السائق -->
             <div class="modal-header chat-header">
-                <img id="driverImage" src="default-avatar.png" alt="صورة السائق" class="rounded-circle me-2"
+                <img id="driverImage" src="images/default-avatar.png" alt="صورة السائق" class="rounded-circle me-2"
                     style="width: 60px; height: 60px;">
                 <div>
                     <h5 class="modal-title" id="driverName">اسم السائق</h5>
@@ -5146,17 +5123,21 @@ body {
 
 
 
-    <!-- Scripts -->
+    <!-- External Libraries -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js"></script>
+    <script src="https://unpkg.com/babel-standalone/babel.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script src="https://unpkg.com/react@18.2.0/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18.2.0/umd/react-dom.production.min.js"></script>
+
+    <!-- Firebase Scripts -->
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
-
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-messaging.js"></script>
     
- 
-<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-messaging.js"></script>
-
 <script>
     
 
@@ -5191,10 +5172,14 @@ async initialize() {
        // يجب تحديث جميع المسارات لتتضمن /Al-Pasha/
 // مثلاً في ملف firebase-messaging-sw.js
 if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('https://alqasimmall.github.io/Pasha-Taxi-/firebase-messaging-sw.js', {
-        scope: 'https://alqasimmall.github.io/Pasha-Taxi-/firebase-messaging-sw.js'
-    })
-}
+            navigator.serviceWorker.register('/js/firebase-messaging-sw.js', {
+                scope: '/'
+            }).then(function(registration) {
+                console.log('Service Worker تم التسجيل بنجاح:', registration);
+            }).catch(function(error) {
+                console.error('فشل تسجيل Service Worker:', error);
+            });
+        }
 
         await this.checkNotificationSupport();
         await this.requestPermission();
@@ -5548,7 +5533,7 @@ notificationHandler.initialize().catch(console.error);
 
                 if (driverData) {
                     // الوصول المباشر إلى الصورة من البيانات الرئيسية
-                    const imageUrl = driverData.imageUrl || 'default-avatar.png';
+                    const imageUrl = driverData.imageUrl || 'images/default-avatar.png';
                     // الوصول إلى الاسم من coordinates
                     const name = driverData?.name || 'اسم غير متوفر';
                     // معلومات السيارة من البيانات الرئيسية
@@ -5601,7 +5586,7 @@ notificationHandler.initialize().catch(console.error);
         return `
         <div class="driver-card">
             <div class="driver-image-container">
-                <img src="${driver.imageUrl || 'default-avatar.png'}" class="driver-image">
+                <img src="${driver.imageUrl || 'images/default-avatar.png'}" class="driver-image">
             </div>
             <div class="driver-info">
                 <h3 class="driver-name">${driver.name || 'اسم غير متوفر'}</h3>
@@ -5673,7 +5658,7 @@ notificationHandler.initialize().catch(console.error);
                     icon: L.divIcon({
                         html: `
                         <div style="position: relative; text-align: center;">
-                            <img src="${driver.imageUrl || 'default-avatar.png'}" 
+                            <img src="${driver.imageUrl || 'images/default-avatar.png'}" 
                                  alt="صورة السائق" 
                                  style="width: 50px; height: 50px; border: 3px solid #FFD700; 
                                  border-radius: 50%; box-shadow: 0 4px 10px rgba(0,0,0,0.3);">
@@ -5690,7 +5675,7 @@ notificationHandler.initialize().catch(console.error);
                 const popupContent = `
                 <div style="text-align: center; font-family: 'Segoe UI', sans-serif; min-width: 200px; background: #000000; border-radius: 10px; padding: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.3);">
                     <div class="driver-popup-header" style="margin-bottom: 10px;">
-                        <img src="${driver.imageUrl || 'default-avatar.png'}" 
+                        <img src="${driver.imageUrl || 'images/default-avatar.png'}" 
                              alt="صورة السائق" 
                              style="width: 80px; height: 80px; border-radius: 50%; border: 3px solid #FFD700; 
                              margin-bottom: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.2);">
@@ -6665,7 +6650,7 @@ function toRad(degrees) {
                             driverMarker.bindPopup(`
                             <div style="text-align: center;">
                                 <div style="margin-bottom: 10px;">
-                                    <img src="${driver.imageUrl || 'default-avatar.png'}" 
+                                    <img src="${driver.imageUrl || 'images/default-avatar.png'}" 
                                          alt="صورة السائق" 
                                          style="width: 70px; height: 70px; border-radius: 50%; border: 3px solid #FFD700; margin-bottom: 10px;">
                                     <h6 style="margin: 5px 0; font-weight: bold;">${driver.name}</h6>
@@ -8361,7 +8346,7 @@ class LocationNotificationSystem {
         document.body.appendChild(toast);
 
         // تشغيل صوت الإشعار
-        const audio = new Audio('/https://github.com/AlQasimMall/Al-Pasha/blob/main/%D8%A7%D9%84%D9%87%D8%A7%D8%AA%D9%81-%D8%A7%D9%84%D8%AB%D8%A7%D8%A8%D8%AA.mp3');
+        const audio = new Audio('/https://github.com/AlQasimMall/taxialpasha/blob/main/%D8%A7%D9%84%D9%87%D8%A7%D8%AA%D9%81-%D8%A7%D9%84%D8%AB%D8%A7%D8%A8%D8%AA.mp3');
         audio.play().catch(error => console.log('Could not play notification sound:', error));
 
         // إزالة الإشعار بعد 5 ثواني
@@ -8846,7 +8831,7 @@ function updateDriverMarkerOnMap(driverId, coordinates) {
                         icon: L.divIcon({
                             html: `
                                 <div style="position: relative; text-align: center;">
-                                    <img src="${driver.imageUrl || 'default-avatar.png'}" 
+                                    <img src="${driver.imageUrl || 'images/default-avatar.png'}" 
                                          alt="صورة السائق" 
                                          style="width: 35px; height: 35px; border-radius: 50%; border: 2px solid #FFD700;">
                                     <i class="fas fa-taxi" 
@@ -8948,9 +8933,11 @@ document.addEventListener('DOMContentLoaded', () => {
         </script>
     </main>
     <!-- ربط ملف الجافا سكريبت -->
-    
+    <script src="/js/firebase-config.js"></script>
+    <script src="/js/app.js"></script>
+    <script src="/js/install.js"></script>
     
 </body>
 </html>
 
-1234567890-
+
