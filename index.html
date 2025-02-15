@@ -14,12 +14,19 @@
     <title>تاكسي العراق - خدمة حجز السيارات الأولى في العراق</title>
 
     <!-- App Icons -->
-    <link rel="icon" type="image/png" href="/images/logo.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="/images/logo.png">
-    <link rel="apple-touch-startup-image" href="/images/logo.png">
+
+    <!-- قبل إغلاق وسم head -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/react-leaflet@4.2.1/dist/react-leaflet.min.js"></script>
+    <link rel="icon" type="image/png" href="https://firebasestorage.googleapis.com/v0/b/messageemeapp.appspot.com/o/driver-images%2F7605a607-6cf8-4b32-aee1-fa7558c98452.png?alt=media&token=5cf9e67c-ba6e-4431-a6a0-79dede15b527">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://firebasestorage.googleapis.com/v0/b/messageemeapp.appspot.com/o/driver-images%2F7605a607-6cf8-4b32-aee1-fa7558c98452.png?alt=media&token=5cf9e67c-ba6e-4431-a6a0-79dede15b527">
+    <link rel="apple-touch-startup-image" href="https://firebasestorage.googleapis.com/v0/b/messageemeapp.appspot.com/o/driver-images%2F7605a607-6cf8-4b32-aee1-fa7558c98452.png?alt=media&token=5cf9e67c-ba6e-4431-a6a0-79dede15b527">
 
     <!-- Web App Manifest -->
-    <link rel="manifest" href="/manifest.json">
+    <link rel="manifest" href="./manifest.json">
 
     <!-- External CSS Libraries -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.rtl.min.css">
@@ -28,18 +35,42 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css">
 
     <!-- App CSS -->
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="./style.css">
 
     <!-- Meta Tags -->
     <meta property="og:title" content="تاكسي العراق">
     <meta property="og:description" content="خدمة حجز سيارات الأجرة الأفضل في العراق">
-    <meta property="og:image" content="/images/logo.png">
+    <meta property="og:image" content="https://firebasestorage.googleapis.com/v0/b/messageemeapp.appspot.com/o/driver-images%2F7605a607-6cf8-4b32-aee1-fa7558c98452.png?alt=media&token=5cf9e67c-ba6e-4431-a6a0-79dede15b527">
     <meta property="og:url" content="https://taxi-iraq.com">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="تاكسي العراق">
     <meta name="twitter:description" content="خدمة حجز سيارات الأجرة الأفضل في العراق">
-    <meta name="twitter:image" content="/images/logo.png">
+    <meta name="twitter:image" content="https://firebasestorage.googleapis.com/v0/b/messageemeapp.appspot.com/o/driver-images%2F7605a607-6cf8-4b32-aee1-fa7558c98452.png?alt=media&token=5cf9e67c-ba6e-4431-a6a0-79dede15b527">
+</head>
+<body>
+    <!-- Content will be here -->
 
+    <!-- External Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js"></script>
+    <script src="https://unpkg.com/babel-standalone/babel.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script src="https://unpkg.com/react@18.2.0/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18.2.0/umd/react-dom.production.min.js"></script>
+
+    <!-- Firebase Scripts -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-messaging.js"></script>
+
+    
+    <!-- App Scripts -->
+    <script src="firebase-config.js"></script>
+    <!-- قبل إغلاق body -->
+<script src="nearby-drivers-map.js"></script>
+    
 
 
     <!-- Application CSS -->
@@ -4216,11 +4247,56 @@ body {
     padding-right: 0;
 }
 
+/* إضافة هذه الأنماط في نهاية الملف */
+.dark-popup {
+    background-color: #1a1a1a !important;
+    color: #FFFFFF !important;
+    border: 2px solid #FFD700 !important;
+}
+
+#nearbyDriversMap {
+    height: 70vh;
+    width: 100%;
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+}
+
+.loading-map {
+    height: 70vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #1a1a1a;
+    color: #FFD700;
+}
+
+.loading-map i {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.leaflet-popup-content-wrapper {
+    background-color: #1a1a1a !important;
+    color: #FFFFFF !important;
+    border: 1px solid #FFD700 !important;
+}
+
+.leaflet-popup-tip {
+    background-color: #1a1a1a !important;
+    border: 1px solid #FFD700 !important;
+}
+
+.custom-div-icon {
+    background: none;
+    border: none;
+}
 
     </style>
 </head>
 <body>
-    <div id="app"></div>
     <!-- Header -->
     <nav class="navbar navbar-expand-lg navbar-dark app-header fixed-top">
 
@@ -4247,6 +4323,10 @@ body {
                                 <h2 class="side-nav-title">تاكسي العراق</h2>
                                 <button class="side-nav-close" onclick="toggleSideNav()">×</button>
                             </div>
+                            <a href="#" class="side-nav-item" onclick="showNearbyDriversMap()">
+                                <i class="fas fa-map-marker-alt"></i>
+                                السائقين في الجوار
+                            </a>
                             <div class="side-nav-items">
                                 <a href="/" class="side-nav-item"><i class="fas fa-home"></i> الرئيسية</a>
                                 <a href="/drivers" class="side-nav-item"><i class="fas fa-users"></i> السائقين</a>
@@ -4770,7 +4850,7 @@ body {
         <div class="modal-content chat-window">
             <!-- رأس النافذة مع صورة واسم السائق -->
             <div class="modal-header chat-header">
-                <img id="driverImage" src="images/default-avatar.png" alt="صورة السائق" class="rounded-circle me-2"
+                <img id="driverImage" src="default-avatar.png" alt="صورة السائق" class="rounded-circle me-2"
                     style="width: 60px; height: 60px;">
                 <div>
                     <h5 class="modal-title" id="driverName">اسم السائق</h5>
@@ -5123,21 +5203,17 @@ body {
 
 
 
-    <!-- External Libraries -->
+    <!-- Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js"></script>
-    <script src="https://unpkg.com/babel-standalone/babel.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-    <script src="https://unpkg.com/react@18.2.0/umd/react.production.min.js"></script>
-    <script src="https://unpkg.com/react-dom@18.2.0/umd/react-dom.production.min.js"></script>
-
-    <!-- Firebase Scripts -->
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-messaging.js"></script>
+
     
+ 
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-messaging.js"></script>
+
 <script>
     
 
@@ -5172,14 +5248,10 @@ async initialize() {
        // يجب تحديث جميع المسارات لتتضمن /Al-Pasha/
 // مثلاً في ملف firebase-messaging-sw.js
 if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('/js/firebase-messaging-sw.js', {
-                scope: '/'
-            }).then(function(registration) {
-                console.log('Service Worker تم التسجيل بنجاح:', registration);
-            }).catch(function(error) {
-                console.error('فشل تسجيل Service Worker:', error);
-            });
-        }
+    navigator.serviceWorker.register('https://alqasimmall.github.io/taxialpasha/firebase-messaging-sw.js', {
+        scope: 'https://alqasimmall.github.io/taxialpasha/firebase-messaging-sw.js'
+    })
+}
 
         await this.checkNotificationSupport();
         await this.requestPermission();
@@ -5533,7 +5605,7 @@ notificationHandler.initialize().catch(console.error);
 
                 if (driverData) {
                     // الوصول المباشر إلى الصورة من البيانات الرئيسية
-                    const imageUrl = driverData.imageUrl || 'images/default-avatar.png';
+                    const imageUrl = driverData.imageUrl || 'default-avatar.png';
                     // الوصول إلى الاسم من coordinates
                     const name = driverData?.name || 'اسم غير متوفر';
                     // معلومات السيارة من البيانات الرئيسية
@@ -5586,7 +5658,7 @@ notificationHandler.initialize().catch(console.error);
         return `
         <div class="driver-card">
             <div class="driver-image-container">
-                <img src="${driver.imageUrl || 'images/default-avatar.png'}" class="driver-image">
+                <img src="${driver.imageUrl || 'default-avatar.png'}" class="driver-image">
             </div>
             <div class="driver-info">
                 <h3 class="driver-name">${driver.name || 'اسم غير متوفر'}</h3>
@@ -5658,7 +5730,7 @@ notificationHandler.initialize().catch(console.error);
                     icon: L.divIcon({
                         html: `
                         <div style="position: relative; text-align: center;">
-                            <img src="${driver.imageUrl || 'images/default-avatar.png'}" 
+                            <img src="${driver.imageUrl || 'default-avatar.png'}" 
                                  alt="صورة السائق" 
                                  style="width: 50px; height: 50px; border: 3px solid #FFD700; 
                                  border-radius: 50%; box-shadow: 0 4px 10px rgba(0,0,0,0.3);">
@@ -5675,7 +5747,7 @@ notificationHandler.initialize().catch(console.error);
                 const popupContent = `
                 <div style="text-align: center; font-family: 'Segoe UI', sans-serif; min-width: 200px; background: #000000; border-radius: 10px; padding: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.3);">
                     <div class="driver-popup-header" style="margin-bottom: 10px;">
-                        <img src="${driver.imageUrl || 'images/default-avatar.png'}" 
+                        <img src="${driver.imageUrl || 'default-avatar.png'}" 
                              alt="صورة السائق" 
                              style="width: 80px; height: 80px; border-radius: 50%; border: 3px solid #FFD700; 
                              margin-bottom: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.2);">
@@ -6590,25 +6662,205 @@ function toRad(degrees) {
             }
         };
     }
-
-
-    function calculateDistance(point1, point2) {
-        // التحقق من صحة النقاط
-        if (!point1 || !point2 || !point1.lat || !point1.lng || !point2.lat || !point2.lng) {
-            return null;
-        }
-
-        const R = 6371;
-        const dLat = toRad(point2.lat - point1.lat);
-        const dLon = toRad(point2.lng - point1.lng);
-        const lat1 = toRad(point1.lat);
-        const lat2 = toRad(point2.lat);
-
-        const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-            Math.sin(dLon / 2) * Math.sin(dLon / 2) * Math.cos(lat1) * Math.cos(lat2);
-        const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-        return R * c;
+// تحسين دالة حساب المسافة
+function calculateDistance(point1, point2) {
+    if (!point1 || !point2 || !point1.lat || !point1.lng || !point2.lat || !point2.lng) {
+        return null;
     }
+
+    // تحويل الإحداثيات إلى راديان
+    const lat1 = toRadians(point1.lat);
+    const lon1 = toRadians(point1.lng);
+    const lat2 = toRadians(point2.lat);
+    const lon2 = toRadians(point2.lng);
+
+    // صيغة هافرساين لحساب المسافة
+    const R = 6371; // نصف قطر الأرض بالكيلومترات
+    const dLat = lat2 - lat1;
+    const dLon = lon2 - lon1;
+
+    const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+        Math.cos(lat1) * Math.cos(lat2) *
+        Math.sin(dLon / 2) * Math.sin(dLon / 2);
+
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    const distance = R * c;
+
+    return distance;
+}
+
+// تحويل الدرجات إلى راديان
+function toRadians(degrees) {
+    return degrees * (Math.PI / 180);
+}
+
+// تنسيق عرض المسافة
+function formatDistance(distance) {
+    if (distance === null) return 'غير متوفر';
+    if (distance < 1) {
+        return `${Math.round(distance * 1000)} متر`;
+    }
+    return `${distance.toFixed(1)} كم`;
+}
+
+// تحديث دالة إنشاء بطاقة السائق مع المسافة المحسنة
+function createDriverCard(driver, key) {
+    let distanceDisplay = 'غير متوفر';
+    let distanceValue = null;
+
+    if (userLocation && driver.coordinates) {
+        distanceValue = calculateDistance(userLocation, driver.coordinates);
+        distanceDisplay = formatDistance(distanceValue);
+    }
+
+    // ترتيب السائقين حسب المسافة
+    const distanceClass = distanceValue !== null ? 
+        (distanceValue < 1 ? 'distance-near' : 
+         distanceValue < 5 ? 'distance-medium' : 'distance-far') : '';
+
+    return `
+        <div class="driver-card ${distanceClass}" data-driver-id="${key}" data-distance="${distanceValue || 999999}">
+            <div class="driver-image-container">
+                <img src="${driver.imageUrl || 'default-avatar.png'}" alt="${driver.name}" class="driver-image">
+                <div class="driver-status ${driver.active ? 'status-active' : 'status-inactive'}">
+                    ${driver.active ? 'متاح' : 'مشغول'}
+                </div>
+                <div class="distance-badge ${distanceClass}">
+                    <i class="fas fa-map-marker-alt"></i>
+                    ${distanceDisplay}
+                </div>
+            </div>
+            <div class="driver-info">
+                <h5 class="driver-name">${driver.name}</h5>
+                <div class="driver-stats">
+                    <div class="stat-item">
+                        <div class="stat-value">
+                            <i class="fas fa-star"></i>
+                            ${driver.rating ? driver.rating.toFixed(1) : '5.0'}
+                        </div>
+                        <div class="stat-label">التقييم</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">
+                            <i class="fas fa-route"></i>
+                            ${driver.trips || 0}
+                        </div>
+                        <div class="stat-label">الرحلات</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">
+                            ${distanceDisplay}
+                        </div>
+                        <div class="stat-label">المسافة</div>
+                    </div>
+                </div>
+                <div class="text-muted">
+                    <p class="mb-2">
+                        <i class="fas fa-car me-2"></i>
+                        ${driver.carType} ${driver.carModel}
+                    </p>
+                    <p class="mb-0">
+                        <i class="fas fa-map-marker-alt me-2"></i>
+                        ${driver.location}
+                    </p>
+                </div>
+            </div>
+            <div class="driver-actions">
+                <button class="action-btn primary" onclick="viewDriverLocation('${key}')">
+                    <i class="fas fa-map-marker-alt"></i>
+                    عرض الموقع
+                </button>
+                <button class="action-btn secondary" onclick="openChatWindow('${key}')">
+                    <i class="fas fa-comment"></i>
+                    مراسلة
+                </button>
+            </div>
+        </div>
+    `;
+}
+
+// تحديث دالة تحميل السائقين مع فرز حسب المسافة
+function loadDrivers(location = 'all') {
+    if (isLoadingDrivers) return;
+    isLoadingDrivers = true;
+    showLoading();
+
+    const driversRef = database.ref('drivers');
+    driversRef.once('value')
+        .then((snapshot) => {
+            const driversGrid = document.getElementById('driversGrid');
+            driversGrid.innerHTML = '';
+            markerLayer.clearLayers();
+
+            const driversArray = [];
+            snapshot.forEach((childSnapshot) => {
+                const driver = childSnapshot.val();
+                const key = childSnapshot.key;
+
+                if (location === 'all' || driver.location === location) {
+                    const distance = userLocation && driver.coordinates ? 
+                        calculateDistance(userLocation, driver.coordinates) : 999999;
+                    
+                    driversArray.push({
+                        ...driver,
+                        id: key,
+                        distance: distance
+                    });
+                }
+            });
+
+            // فرز السائقين حسب المسافة
+            driversArray.sort((a, b) => a.distance - b.distance);
+
+            // عرض السائقين
+            driversArray.forEach(driver => {
+                driversGrid.innerHTML += createDriverCard(driver, driver.id);
+                addDriverMarker(driver, driver.id);
+            });
+        })
+        .catch((error) => {
+            console.error('Error loading drivers:', error);
+            showToast('حدث خطأ في تحميل بيانات السائقين', 'error');
+        })
+        .finally(() => {
+            hideLoading();
+            isLoadingDrivers = false;
+        });
+}
+
+// إضافة أنماط CSS للمسافات
+const styleSheet = document.createElement('style');
+styleSheet.textContent = `
+    .distance-badge {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        padding: 5px 10px;
+        border-radius: 15px;
+        font-size: 0.8rem;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        backdrop-filter: blur(5px);
+    }
+
+    .distance-near .distance-badge {
+        background-color: rgba(46, 204, 64, 0.9);
+        color: white;
+    }
+
+    .distance-medium .distance-badge {
+        background-color: rgba(255, 215, 0, 0.9);
+        color: black;
+    }
+
+    .distance-far .distance-badge {
+        background-color: rgba(255, 59, 48, 0.9);
+        color: white;
+    }
+`;
+document.head.appendChild(styleSheet);
 
     function toRad(degrees) {
         return degrees * Math.PI / 180;
@@ -6650,7 +6902,7 @@ function toRad(degrees) {
                             driverMarker.bindPopup(`
                             <div style="text-align: center;">
                                 <div style="margin-bottom: 10px;">
-                                    <img src="${driver.imageUrl || 'images/default-avatar.png'}" 
+                                    <img src="${driver.imageUrl || 'default-avatar.png'}" 
                                          alt="صورة السائق" 
                                          style="width: 70px; height: 70px; border-radius: 50%; border: 3px solid #FFD700; margin-bottom: 10px;">
                                     <h6 style="margin: 5px 0; font-weight: bold;">${driver.name}</h6>
@@ -8659,6 +8911,36 @@ class NotificationTester {
         };
     }
 }
+
+
+
+// إضافة في نهاية الملف
+function showNearbyDriversMap() {
+    // إغلاق القائمة الجانبية
+    toggleSideNav();
+
+    // عرض نافذة منبثقة تحتوي على الخريطة
+    Swal.fire({
+        title: 'السائقين في الجوار',
+        html: '<div id="nearbyDriversMap"></div>',
+        width: '90%',
+        padding: '0',
+        background: '#1a1a1a',
+        showConfirmButton: false,
+        showCloseButton: true,
+        customClass: {
+            popup: 'dark-popup',
+            title: 'text-white',
+            htmlContainer: 'p-0'
+        },
+        didOpen: () => {
+            // تهيئة الخريطة
+            const mapContainer = document.getElementById('nearbyDriversMap');
+            const root = ReactDOM.createRoot(mapContainer);
+            root.render(React.createElement(NearbyDriversMap));
+        }
+    });
+}
 function captureCurrentLocation() {
     // إنشاء وعد لمعالجة تحديد الموقع
     return new Promise((resolve, reject) => {
@@ -8831,7 +9113,7 @@ function updateDriverMarkerOnMap(driverId, coordinates) {
                         icon: L.divIcon({
                             html: `
                                 <div style="position: relative; text-align: center;">
-                                    <img src="${driver.imageUrl || 'images/default-avatar.png'}" 
+                                    <img src="${driver.imageUrl || 'default-avatar.png'}" 
                                          alt="صورة السائق" 
                                          style="width: 35px; height: 35px; border-radius: 50%; border: 2px solid #FFD700;">
                                     <i class="fas fa-taxi" 
@@ -8933,11 +9215,11 @@ document.addEventListener('DOMContentLoaded', () => {
         </script>
     </main>
     <!-- ربط ملف الجافا سكريبت -->
-    <script src="/js/firebase-config.js"></script>
-    <script src="/js/app.js"></script>
-    <script src="/js/install.js"></script>
+     <!-- قبل إغلاق body -->
+<script src="nearby-drivers-map.js"></script>
+    
     
 </body>
 </html>
 
-
+1234567890-
